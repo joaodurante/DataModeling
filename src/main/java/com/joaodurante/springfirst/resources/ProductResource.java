@@ -21,6 +21,4 @@ public class ProductResource {
         Product obj = this.service.find(id);
         return ResponseEntity.ok().body(obj);
     }
-
-
 }
