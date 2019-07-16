@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class CategoryService {
     @Autowired
-    private CategoryRepository repo;
+    private CategoryRepository categoryRepository;
 
     public Category find(Integer id){
-        return this.repo.findById(id)
+        return this.categoryRepository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Object was not found using the id: " + id ));
     }
 }

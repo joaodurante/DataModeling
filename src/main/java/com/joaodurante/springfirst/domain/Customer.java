@@ -1,5 +1,6 @@
 package com.joaodurante.springfirst.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.joaodurante.springfirst.domain.enums.CustomerType;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public class Customer implements Serializable {
     private String document;
     private Integer type;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "customer")
     private List<Address> address;
 

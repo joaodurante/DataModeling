@@ -1,5 +1,7 @@
 package com.joaodurante.springfirst.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -19,6 +21,7 @@ public class Address implements Serializable {
     @JoinColumn(name = "city_id")
     private City city;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
