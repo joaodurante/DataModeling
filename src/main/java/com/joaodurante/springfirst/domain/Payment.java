@@ -1,6 +1,5 @@
 package com.joaodurante.springfirst.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.joaodurante.springfirst.domain.enums.PaymentState;
 
 import javax.persistence.*;
@@ -15,25 +14,25 @@ public abstract class Payment implements Serializable {
     private Integer state;
 
     @OneToOne
-    @JoinColumn(name = "request_id")
+    @JoinColumn(name = "demand_id")
     @MapsId
-    private Request request;
+    private Demand demand;
 
     public Payment(){}
-    public Payment(Integer id, PaymentState state, Request request) {
+    public Payment(Integer id, PaymentState state, Demand demand) {
         super();
         this.id = id;
         this.state = state.getCode();
-        this.request = request;
+        this.demand = demand;
     }
 
     public Integer getId() { return id; }
     public PaymentState getState() { return PaymentState.toEnum(this.state); }
-    public Request getRequest() { return request; }
+    public Demand getDemand() { return demand; }
 
     public void setId(Integer id) { this.id = id; }
     public void setState(PaymentState state) { this.state = state.getCode(); }
-    public void setRequest(Request request) { this.request = request; }
+    public void setDemand(Demand demand) { this.demand = demand; }
 
     @Override
     public boolean equals(Object o) {

@@ -16,8 +16,8 @@ public class TicketPayment extends Payment {
     private Date duedate;
 
     public TicketPayment(){}
-    public TicketPayment(Integer id, PaymentState state, Request request, Date payday, Date duedate) {
-        super(id, state, request);
+    public TicketPayment(Integer id, PaymentState state, Demand demand, Date payday, Date duedate) {
+        super(id, state, demand);
         this.payday = payday;
         this.duedate = duedate;
     }

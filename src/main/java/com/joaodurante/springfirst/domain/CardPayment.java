@@ -10,8 +10,8 @@ public class CardPayment extends Payment {
     private Integer installments;
 
     public CardPayment(){}
-    public CardPayment(Integer id, PaymentState state, Request request, Integer installments) {
-        super(id, state, request);
+    public CardPayment(Integer id, PaymentState state, Demand demand, Integer installments) {
+        super(id, state, demand);
         this.installments = installments;
     }
 

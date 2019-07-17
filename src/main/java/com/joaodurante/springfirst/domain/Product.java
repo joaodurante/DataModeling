@@ -25,7 +25,7 @@ public class Product implements Serializable {
     private List<Category> categories = new ArrayList<>();
 
     @OneToMany(mappedBy = "id.product")
-    private Set<RequestItem> requestItems = new HashSet<>();
+    private Set<DemandItem> demandItems = new HashSet<>();
 
     public Product(){}
     public Product(Integer id, String name, Double price) {
@@ -35,10 +35,10 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public List<Request> getRequests(){
-        List<Request> list = new ArrayList<>();
-        for(RequestItem i : this.requestItems){
-            list.add(i.getRequest());
+    public List<Demand> getDemands(){
+        List<Demand> list = new ArrayList<>();
+        for(DemandItem i : this.demandItems){
+            list.add(i.getDemand());
         }
         return list;
     }
@@ -67,8 +67,8 @@ public class Product implements Serializable {
     public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
-    public Set<RequestItem> getRequestItems() { return requestItems; }
-    public void setRequestItems(Set<RequestItem> ordemItems) { this.requestItems = ordemItems; }
+    public Set<DemandItem> getDemandItems() { return demandItems; }
+    public void setDemandItems(Set<DemandItem> ordemItems) { this.demandItems = ordemItems; }
 
     @Override
     public boolean equals(Object o) {

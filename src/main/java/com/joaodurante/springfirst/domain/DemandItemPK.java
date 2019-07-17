@@ -7,18 +7,18 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class RequestItemPK implements Serializable {
+public class DemandItemPK implements Serializable {
 
     @ManyToOne
-    @JoinColumn(name = "request_id")
-    private Request request;
+    @JoinColumn(name = "demand_id")
+    private Demand demand;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
-    public Request getRequest() { return request; }
-    public void setRequest(Request request) { this.request = request; }
+    public Demand getDemand() { return demand; }
+    public void setDemand(Demand demand) { this.demand = demand; }
     public Product getProduct() { return product; }
     public void setProduct(Product product) { this.product = product; }
 
@@ -26,13 +26,13 @@ public class RequestItemPK implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RequestItemPK that = (RequestItemPK) o;
-        return request.equals(that.request) &&
+        DemandItemPK that = (DemandItemPK) o;
+        return demand.equals(that.demand) &&
                 product.equals(that.product);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(request, product);
+        return Objects.hash(demand, product);
     }
 }

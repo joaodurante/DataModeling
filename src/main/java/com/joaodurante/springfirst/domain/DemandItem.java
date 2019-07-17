@@ -1,39 +1,37 @@
 package com.joaodurante.springfirst.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class RequestItem implements Serializable {
+public class DemandItem implements Serializable {
 
     @EmbeddedId
-    private RequestItemPK id = new RequestItemPK();;
+    private DemandItemPK id = new DemandItemPK();;
     private Double discount;
     private Integer quantity;
     private Double price;
 
-    public RequestItem(){}
+    public DemandItem(){}
 
-    public RequestItem(Request request, Product product, Double discount, Integer quantity, Double price) {
+    public DemandItem(Demand demand, Product product, Double discount, Integer quantity, Double price) {
         super();
-        id.setRequest(request);
+        id.setDemand(demand);
         id.setProduct(product);
         this.discount = discount;
         this.quantity = quantity;
         this.price = price;
     }
 
-    public RequestItemPK getId() {
+    public DemandItemPK getId() {
         return id;
     }
 
-    public Request getRequest(){ return id.getRequest(); }
+    public Demand getDemand(){ return id.getDemand(); }
     public Product getProduct(){ return id.getProduct(); }
-    public void setId(RequestItemPK id) { this.id = id; }
+    public void setId(DemandItemPK id) { this.id = id; }
     public Double getDiscount() {
         return discount;
     }
@@ -57,8 +55,8 @@ public class RequestItem implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RequestItem requestItem = (RequestItem) o;
-        return id.equals(requestItem.id);
+        DemandItem demandItem = (DemandItem) o;
+        return id.equals(demandItem.id);
     }
 
     @Override

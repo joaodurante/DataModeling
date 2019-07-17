@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class Request implements Serializable {
+public class Demand implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -19,7 +19,7 @@ public class Request implements Serializable {
     @JsonFormat(pattern="dd/MM/yyyy HH:mm")
     private Date time;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "request")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "demand")
     private Payment payment;
 
     @ManyToOne
@@ -30,11 +30,11 @@ public class Request implements Serializable {
     @JoinColumn(name = "delivery_address_id")
     private Address address;
 
-    @OneToMany(mappedBy = "id.request")
-    private Set<RequestItem> requestItems = new HashSet<>();;
+    @OneToMany(mappedBy = "id.demand")
+    private Set<DemandItem> demandItems = new HashSet<>();;
 
-    public Request(){}
-    public Request(Integer id, Date time, Customer customer, Address address) {
+    public Demand(){}
+    public Demand(Integer id, Date time, Customer customer, Address address) {
         this.id = id;
         this.time = time;
         this.customer = customer;
@@ -46,21 +46,21 @@ public class Request implements Serializable {
     public Address getAddress() { return address; }
     public Payment getPayment() { return payment; }
     public Customer getCustomer() { return customer; }
-    public Set<RequestItem> getRequestItems() { return requestItems; }
+    public Set<DemandItem> getDemandItems() { return demandItems; }
 
     public void setId(Integer id) { this.id = id; }
     public void setTime(Date time) { this.time = time; }
     public void setAddress(Address address) { this.address = address; }
     public void setPayment(Payment payment) { this.payment = payment; }
     public void setCustomer(Customer customer) { this.customer = customer; }
-    public void setRequestItems(Set<RequestItem> ordemItems) { this.requestItems = ordemItems; }
+    public void setDemandItems(Set<DemandItem> ordemItems) { this.demandItems = ordemItems; }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Request request = (Request) o;
-        return id.equals(request.id);
+        Demand demand = (Demand) o;
+        return id.equals(demand.id);
     }
 
     @Override

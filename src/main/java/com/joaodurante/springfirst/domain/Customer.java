@@ -1,6 +1,5 @@
 package com.joaodurante.springfirst.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.joaodurante.springfirst.domain.enums.CustomerType;
 
@@ -27,7 +26,7 @@ public class Customer implements Serializable {
     private Set<String> phones;
 
     @OneToMany(mappedBy = "customer")
-    private List<Request> requests = new ArrayList<>();
+    private List<Demand> demands = new ArrayList<>();
 
     public Customer(){}
     public Customer(Integer id, String name, String email, String document, CustomerType type) {
@@ -46,7 +45,7 @@ public class Customer implements Serializable {
     public void setType(CustomerType type) { this.type = type.getCode(); }
     public void setPhones(Set<String> phones) { this.phones = phones; }
     public void setAddress(List<Address> address) { this.address = address; }
-    public void setRequests(List<Request> requests) { this.requests = requests; }
+    public void setDemands(List<Demand> demands) { this.demands = demands; }
 
     public String getName() { return name; }
     public String getEmail() { return email; }
@@ -54,7 +53,7 @@ public class Customer implements Serializable {
     public CustomerType getType() { return CustomerType.toEnum(this.type); }
     public Set<String> getPhones() { return phones; }
     public List<Address> getAddress() { return address; }
-    public List<Request> getRequests() { return requests; }
+    public List<Demand> getDemands() { return demands; }
 
     @Override
     public boolean equals(Object o) {

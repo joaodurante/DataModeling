@@ -28,11 +28,11 @@ public class SpringFirstProjectApplication implements CommandLineRunner {
     @Autowired
     private AddressRepository addressRepository;
     @Autowired
-    private RequestRepository requestRepository;
+    private DemandRepository demandRepository;
     @Autowired
     private PaymentRepository paymentRepository;
     @Autowired
-    private RequestItemRepository requestItemRepository;
+    private DemandItemRepository demandItemRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringFirstProjectApplication.class, args);
@@ -79,30 +79,30 @@ public class SpringFirstProjectApplication implements CommandLineRunner {
 
         SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-        Request request1 = new Request(null, date.parse("30/09/2017 10:32"), customer1, address1);
-        Request request2 = new Request(null, date.parse("10/10/2017 19:35"), customer1, address2);
+        Demand demand1 = new Demand(null, date.parse("30/09/2017 10:32"), customer1, address1);
+        Demand demand2 = new Demand(null, date.parse("10/10/2017 19:35"), customer1, address2);
 
-        Payment payment1 = new CardPayment(null, PaymentState.PAID, request1, 6);
-        request1.setPayment(payment1);
-        Payment payment2 = new TicketPayment(null, PaymentState.PENDING, request2, null, date.parse("20/10/2017 00:00"));
-        request2.setPayment(payment2);
+        Payment payment1 = new CardPayment(null, PaymentState.PAID, demand1, 6);
+        demand1.setPayment(payment1);
+        Payment payment2 = new TicketPayment(null, PaymentState.PENDING, demand2, null, date.parse("20/10/2017 00:00"));
+        demand2.setPayment(payment2);
 
-        customer1.getRequests().addAll(Arrays.asList(request1, request2));
+        customer1.getDemands().addAll(Arrays.asList(demand1, demand2));
 
-        requestRepository.saveAll(Arrays.asList(request1, request2));
+        demandRepository.saveAll(Arrays.asList(demand1, demand2));
         paymentRepository.saveAll(Arrays.asList(payment1, payment2));
 
-        RequestItem requestItem1 = new RequestItem(request1, product1, 0.00, 1, 2000.00);
-        RequestItem requestItem2 = new RequestItem(request1, product3, 0.00, 2, 80.00);
-        RequestItem requestItem3 = new RequestItem(request2, product2, 100.00, 1, 800.00);
+        DemandItem demandItem1 = new DemandItem(demand1, product1, 0.00, 1, 2000.00);
+        DemandItem demandItem2 = new DemandItem(demand1, product3, 0.00, 2, 80.00);
+        DemandItem demandItem3 = new DemandItem(demand2, product2, 100.00, 1, 800.00);
 
-        request1.getRequestItems().addAll(Arrays.asList(requestItem1, requestItem2));
-        request2.getRequestItems().addAll(Arrays.asList(requestItem3));
+        demand1.getDemandItems().addAll(Arrays.asList(demandItem1, demandItem2));
+        demand2.getDemandItems().addAll(Arrays.asList(demandItem3));
 
-        product1.getRequestItems().addAll(Arrays.asList(requestItem1));
-        product2.getRequestItems().addAll(Arrays.asList(requestItem3));
-        product3.getRequestItems().addAll(Arrays.asList(requestItem2));
+        product1.getDemandItems().addAll(Arrays.asList(demandItem1));
+        product2.getDemandItems().addAll(Arrays.asList(demandItem3));
+        product3.getDemandItems().addAll(Arrays.asList(demandItem2));
 
-        requestItemRepository.saveAll(Arrays.asList(requestItem1, requestItem2, requestItem3));
+        demandItemRepository.saveAll(Arrays.asList(demandItem1, demandItem2, demandItem3));
     }
 }
