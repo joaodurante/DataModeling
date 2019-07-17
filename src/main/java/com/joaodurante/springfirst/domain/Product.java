@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Product implements Serializable {
@@ -26,45 +24,51 @@ public class Product implements Serializable {
     )
     private List<Category> categories = new ArrayList<>();
 
-    public Product(){}
+    @OneToMany(mappedBy = "id.product")
+    private Set<RequestItem> requestItems = new HashSet<>();
 
+    public Product(){}
     public Product(Integer id, String name, Double price) {
+        super();
         this.id = id;
         this.name = name;
         this.price = price;
+    }
+
+    public List<Request> getRequests(){
+        List<Request> list = new ArrayList<>();
+        for(RequestItem i : this.requestItems){
+            list.add(i.getRequest());
+        }
+        return list;
     }
 
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public Double getPrice() {
         return price;
     }
-
     public void setPrice(Double price) {
         this.price = price;
     }
-
     public List<Category> getCategories() {
         return categories;
     }
-
     public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
+    public Set<RequestItem> getRequestItems() { return requestItems; }
+    public void setRequestItems(Set<RequestItem> ordemItems) { this.requestItems = ordemItems; }
 
     @Override
     public boolean equals(Object o) {

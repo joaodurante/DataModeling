@@ -1,0 +1,50 @@
+package com.joaodurante.springfirst.domain;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.joaodurante.springfirst.domain.enums.PaymentState;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Payment implements Serializable {
+    @Id
+    private Integer id;
+    private Integer state;
+
+    @OneToOne
+    @JoinColumn(name = "request_id")
+    @MapsId
+    private Request request;
+
+    public Payment(){}
+    public Payment(Integer id, PaymentState state, Request request) {
+        super();
+        this.id = id;
+        this.state = state.getCode();
+        this.request = request;
+    }
+
+    public Integer getId() { return id; }
+    public PaymentState getState() { return PaymentState.toEnum(this.state); }
+    public Request getRequest() { return request; }
+
+    public void setId(Integer id) { this.id = id; }
+    public void setState(PaymentState state) { this.state = state.getCode(); }
+    public void setRequest(Request request) { this.request = request; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Payment payment = (Payment) o;
+        return id.equals(payment.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+}
