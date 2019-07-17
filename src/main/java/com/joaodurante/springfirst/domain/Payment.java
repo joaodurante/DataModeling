@@ -1,5 +1,6 @@
 package com.joaodurante.springfirst.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.joaodurante.springfirst.domain.enums.PaymentState;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ public abstract class Payment implements Serializable {
     private Integer id;
     private Integer state;
 
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "demand_id")
     @MapsId

@@ -1,5 +1,6 @@
 package com.joaodurante.springfirst.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.joaodurante.springfirst.domain.enums.CustomerType;
 
@@ -25,6 +26,7 @@ public class Customer implements Serializable {
     @CollectionTable(name = "PHONE")
     private Set<String> phones;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "customer")
     private List<Demand> demands = new ArrayList<>();
 

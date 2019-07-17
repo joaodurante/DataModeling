@@ -1,7 +1,7 @@
 package com.joaodurante.springfirst.resources;
 
-import com.joaodurante.springfirst.domain.Customer;
-import com.joaodurante.springfirst.services.CustomerService;
+import com.joaodurante.springfirst.domain.Demand;
+import com.joaodurante.springfirst.services.DemandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,15 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/customers")
-public class CustomerResource {
-
+@RequestMapping(value = "/demands")
+public class DemandResource {
     @Autowired
-    private CustomerService customerService;
+    DemandService demandService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity list(@PathVariable Integer id){
-        Customer obj = this.customerService.find(id);
+        Demand obj = demandService.find(id);
         return ResponseEntity.ok().body(obj);
     }
 }

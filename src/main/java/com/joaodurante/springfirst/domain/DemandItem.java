@@ -1,5 +1,7 @@
 package com.joaodurante.springfirst.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import java.io.Serializable;
@@ -8,8 +10,10 @@ import java.util.Objects;
 @Entity
 public class DemandItem implements Serializable {
 
+    @JsonIgnore
     @EmbeddedId
-    private DemandItemPK id = new DemandItemPK();;
+    private DemandItemPK id = new DemandItemPK();
+
     private Double discount;
     private Integer quantity;
     private Double price;
@@ -29,6 +33,7 @@ public class DemandItem implements Serializable {
         return id;
     }
 
+    @JsonIgnore
     public Demand getDemand(){ return id.getDemand(); }
     public Product getProduct(){ return id.getProduct(); }
     public void setId(DemandItemPK id) { this.id = id; }
