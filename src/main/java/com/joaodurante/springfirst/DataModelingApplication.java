@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 @SpringBootApplication
-public class SpringFirstProjectApplication implements CommandLineRunner {
+public class DataModelingApplication implements CommandLineRunner {
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -35,7 +35,7 @@ public class SpringFirstProjectApplication implements CommandLineRunner {
     private DemandItemRepository demandItemRepository;
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringFirstProjectApplication.class, args);
+        SpringApplication.run(DataModelingApplication.class, args);
     }
 
     @Override
