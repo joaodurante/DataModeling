@@ -17,7 +17,7 @@ public class ProductResource {
     private ProductService service;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity list(@PathVariable Integer id){
+    public ResponseEntity<Product> find(@PathVariable Integer id){
         Product obj = this.service.find(id);
         return ResponseEntity.ok().body(obj);
     }
