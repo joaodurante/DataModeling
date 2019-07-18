@@ -20,11 +20,11 @@ public class Demand implements Serializable {
     @JsonFormat(pattern="dd/MM/yyyy HH:mm")
     private Date time;
 
-    @JsonManagedReference
+
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "demand")
     private Payment payment;
 
-    @JsonManagedReference
+
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
