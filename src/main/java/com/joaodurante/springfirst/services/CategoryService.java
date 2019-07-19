@@ -3,8 +3,10 @@ package com.joaodurante.springfirst.services;
 import com.joaodurante.springfirst.domain.Category;
 import com.joaodurante.springfirst.repositories.CategoryRepository;
 
+import com.joaodurante.springfirst.services.exceptions.DataIntegrityException;
 import com.joaodurante.springfirst.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,5 +27,14 @@ public class CategoryService {
     public Category update(Category obj){
         this.find(obj.getId());
         return this.categoryRepository.save(obj);
+    }
+
+    public void delete(Integer id){
+        this.find(id);
+        try{
+            this.categoryRepository.deleteById(id);
+        }catch(DataIntegrityViolationException e){
+            throw new DataIntegrityException("It's not possible to delete a category with products in it");
+        }
     }
 }

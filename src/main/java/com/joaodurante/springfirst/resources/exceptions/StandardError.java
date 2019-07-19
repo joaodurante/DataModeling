@@ -1,5 +1,7 @@
 package com.joaodurante.springfirst.resources.exceptions;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 
 public class StandardError implements Serializable {
