@@ -42,6 +42,12 @@ public class DataModelingApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Category cat1 = new Category(null, "Technology");
         Category cat2 = new Category(null, "Office");
+        Category cat3 = new Category(null, "Kids");
+        Category cat4 = new Category(null, "Games");
+        Category cat5 = new Category(null, "Health");
+        Category cat6 = new Category(null, "Home");
+        Category cat7 = new Category(null, "Drinks");
+        Category cat8 = new Category(null, "Garden");
         Product product1 = new Product(null, "Computer", 500.0);
         Product product2 = new Product(null, "Printer", 100.0);
         Product product3 = new Product(null, "Mouse", 80.0);
@@ -52,7 +58,7 @@ public class DataModelingApplication implements CommandLineRunner {
         product2.getCategories().addAll(Arrays.asList(cat1, cat2));
         product3.getCategories().add(cat1);
 
-        categoryRepository.saveAll(Arrays.asList(cat1, cat2));
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8));
         productRepository.saveAll(Arrays.asList(product1, product2, product3));
 
         State state1 = new State(null, "São Paulo");
