@@ -1,5 +1,6 @@
 package com.joaodurante.springfirst.resources;
 
+import com.joaodurante.springfirst.DTO.CategoryDTO;
 import com.joaodurante.springfirst.domain.Category;
 import com.joaodurante.springfirst.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value="/categories")
@@ -15,6 +18,13 @@ public class CategoryResource {
 
     @Autowired
     private CategoryService categoryService;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<List<CategoryDTO>> findAll(){
+        List<Category> list = categoryService.findAll();
+        List<CategoryDTO> listDTO = list.stream().map(elem -> new CategoryDTO(elem)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDTO);
+    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Category> find(@PathVariable Integer id){
