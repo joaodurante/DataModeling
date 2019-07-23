@@ -37,11 +37,12 @@ public class Customer implements Serializable {
         this.name = name;
         this.email = email;
         this.document = document;
-        this.type = type.getCode();
+        this.type = (type==null) ? null : type.getCode();
         this.address = new ArrayList<>();
         this.phones = new HashSet<>();
     }
 
+    public void setId(Integer id) { this.id = id; }
     public void setName(String name) { this.name = name; }
     public void setEmail(String email) { this.email = email; }
     public void setDocument(String document) { this.document = document; }
@@ -50,6 +51,7 @@ public class Customer implements Serializable {
     public void setAddress(List<Address> address) { this.address = address; }
     public void setDemands(List<Demand> demands) { this.demands = demands; }
 
+    public Integer getId() { return id; }
     public String getName() { return name; }
     public String getEmail() { return email; }
     public String getDocument() { return document; }

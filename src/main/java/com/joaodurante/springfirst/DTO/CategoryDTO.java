@@ -1,11 +1,16 @@
 package com.joaodurante.springfirst.DTO;
 
 import com.joaodurante.springfirst.domain.Category;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 public class CategoryDTO implements Serializable {
     private Integer id;
+
+    @NotEmpty(message = "Required field")
+    @Length(min=4, max=20, message = "The size must be between 4 and 20")
     private String name;
 
     public CategoryDTO(){}

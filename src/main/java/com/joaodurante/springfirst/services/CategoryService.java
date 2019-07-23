@@ -1,5 +1,6 @@
 package com.joaodurante.springfirst.services;
 
+import com.joaodurante.springfirst.DTO.CategoryDTO;
 import com.joaodurante.springfirst.domain.Category;
 import com.joaodurante.springfirst.repositories.CategoryRepository;
 
@@ -50,5 +51,9 @@ public class CategoryService {
         }catch(DataIntegrityViolationException e){
             throw new DataIntegrityException("It's not possible to delete a category with products in it");
         }
+    }
+
+    public Category fromDTO(CategoryDTO obj){
+        return new Category(obj.getId(), obj.getName());
     }
 }
