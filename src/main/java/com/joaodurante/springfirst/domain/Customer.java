@@ -18,7 +18,7 @@ public class Customer implements Serializable {
     private Integer type;
 
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Address> address;
 
     @ElementCollection

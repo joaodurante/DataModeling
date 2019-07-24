@@ -1,20 +1,45 @@
 package com.joaodurante.springfirst.DTO;
 
+import com.joaodurante.springfirst.services.validations.CustomerInsert;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@CustomerInsert
 public class CustomerInsertDTO implements Serializable {
+
+    @NotEmpty(message = "Required field")
+    @Length(min = 3, max = 40, message = "The size must be between 3 and 40")
     private String name;
+
+    @NotEmpty(message = "Required field")
+    @Email(message = "Invalid email")
     private String email;
+
+    @NotEmpty(message = "Required field")
     private String document;
+
     private Integer type;
 
+    @NotEmpty(message = "Required field")
     private String street;
+
+    @NotEmpty(message = "Required field")
     private String number;
+
     private String complement;
+
+    @NotEmpty(message = "Required field")
     private String district;
+
+    @NotEmpty(message = "Required field")
     private String zipCode;
 
+    @NotEmpty(message = "Required field")
     private String phone;
+
     private String secondaryPhone;
 
     private Integer cityId;
