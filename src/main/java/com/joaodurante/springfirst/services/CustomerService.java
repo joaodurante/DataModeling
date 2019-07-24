@@ -1,7 +1,12 @@
 package com.joaodurante.springfirst.services;
 
 import com.joaodurante.springfirst.DTO.CustomerDTO;
+import com.joaodurante.springfirst.DTO.CustomerInsertDTO;
+import com.joaodurante.springfirst.domain.Address;
+import com.joaodurante.springfirst.domain.City;
 import com.joaodurante.springfirst.domain.Customer;
+import com.joaodurante.springfirst.domain.enums.CustomerType;
+import com.joaodurante.springfirst.repositories.AddressRepository;
 import com.joaodurante.springfirst.repositories.CustomerRepository;
 import com.joaodurante.springfirst.services.exceptions.DataIntegrityException;
 import com.joaodurante.springfirst.services.exceptions.ObjectNotFoundException;
@@ -19,6 +24,9 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private AddressRepository addressRepository;
+
     public List<Customer> findAll(){
         return customerRepository.findAll();
     }
@@ -31,6 +39,13 @@ public class CustomerService {
     public Page<Customer> findPage(Integer page, Integer size, String direction, String orderBy){
         PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.valueOf(direction), orderBy);
         return customerRepository.findAll(pageRequest);
+    }
+
+    public Customer insert(Customer obj){
+        obj.setId(null);
+        obj = this.customerRepository.save(obj);
+        this.addressRepository.saveAll(obj.getAddress());
+        return obj;
     }
 
     public Customer update(Customer obj){
@@ -50,6 +65,19 @@ public class CustomerService {
 
     public Customer fromDTO(CustomerDTO obj){
         return new Customer(obj.getId(), obj.getName(), obj.getEmail(), null, null);
+    }
+
+    public Customer fromDTO(CustomerInsertDTO obj){
+        Customer customer = new Customer(null, obj.getName(), obj.getEmail(), obj.getDocument(), CustomerType.toEnum(obj.getType()));
+        City city = new City(obj.getCityId(), null, null);
+        Address address = new Address(null, obj.getStreet(), obj.getNumber(), obj.getComplement(), obj.getDistrict(), obj.getZipCode(), customer, city);
+
+        customer.getAddress().add(address);
+        customer.getPhones().add(obj.getPhone());
+        if(obj.getSecondaryPhone() != null)
+            customer.getPhones().add(obj.getSecondaryPhone());
+
+        return customer;
     }
 
     private void updateData(Customer newObj, Customer obj){

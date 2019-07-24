@@ -1,8 +1,6 @@
 package com.joaodurante.springfirst.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.joaodurante.springfirst.domain.enums.CustomerType;
 
 import javax.persistence.*;

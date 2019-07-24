@@ -1,9 +1,9 @@
 package com.joaodurante.springfirst.domain.enums;
 
 public enum PaymentState {
-    PAID(1, "Paid"),
-    PENDING(2, "Pending"),
-    CANCELED(3, "Canceled");
+    PAID(0, "Paid"),
+    PENDING(1, "Pending"),
+    CANCELED(2, "Canceled");
 
     private int code;
     private String description;
