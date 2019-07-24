@@ -1,12 +1,14 @@
 package com.joaodurante.springfirst.DTO;
 
 import com.joaodurante.springfirst.domain.Customer;
+import com.joaodurante.springfirst.services.validations.CustomerUpdate;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@CustomerUpdate
 public class CustomerDTO implements Serializable {
     private Integer id;
 
