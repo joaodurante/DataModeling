@@ -2,8 +2,10 @@ package com.joaodurante.springfirst.services.validations;
 
 import com.joaodurante.springfirst.DTO.CustomerInsertDTO;
 import com.joaodurante.springfirst.domain.enums.CustomerType;
+import com.joaodurante.springfirst.repositories.CustomerRepository;
 import com.joaodurante.springfirst.resources.exceptions.FieldMessage;
 import com.joaodurante.springfirst.services.validations.utils.DocumentUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,10 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 public class CustomerInsertValidator implements ConstraintValidator<CustomerInsert, CustomerInsertDTO> {
+
+    @Autowired
+    CustomerRepository customerRepository;
+
     @Override
     public void initialize(CustomerInsert ann) {
     }
@@ -25,6 +31,8 @@ public class CustomerInsertValidator implements ConstraintValidator<CustomerInse
         else if(obj.getType().equals(CustomerType.LEGALENTITY.getCode()) && !DocumentUtil.isValidTin(obj.getDocument()))
             list.add(new FieldMessage("Document", "Invalid CNPJ"));
 
+        if(customerRepository.findByEmail(obj.getEmail()) != null)
+            list.add(new FieldMessage("Email", "This email is already in use."));
 
         for (FieldMessage x : list) {
             context.disableDefaultConstraintViolation();
