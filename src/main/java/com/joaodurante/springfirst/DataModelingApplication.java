@@ -42,24 +42,49 @@ public class DataModelingApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Category cat1 = new Category(null, "Technology");
         Category cat2 = new Category(null, "Office");
-        Category cat3 = new Category(null, "Kids");
-        Category cat4 = new Category(null, "Games");
-        Category cat5 = new Category(null, "Health");
-        Category cat6 = new Category(null, "Home");
-        Category cat7 = new Category(null, "Drinks");
-        Category cat8 = new Category(null, "Garden");
+        Category cat3 = new Category(null, "Home");
+        Category cat4 = new Category(null, "Eletronics");
+        Category cat5 = new Category(null, "Garden");
+        Category cat6 = new Category(null, "Decoration");
+        Category cat7 = new Category(null, "Perfume");
+
         Product product1 = new Product(null, "Computer", 500.0);
         Product product2 = new Product(null, "Printer", 100.0);
         Product product3 = new Product(null, "Mouse", 80.0);
+        Product product4 = new Product(null, "Desk", 300.0);
+        Product product5 = new Product(null, "Towel", 50.0);
+        Product product6 = new Product(null, "Blanket", 200.0);
+        Product product7 = new Product(null, "TV", 1200.0);
+        Product product8 = new Product(null, "Brush cutter", 800.0);
+        Product product9 = new Product(null, "Lamp", 100.0);
+        Product product10 = new Product(null, "Pendant", 180.0);
+        Product product11 = new Product(null, "Shampoo", 90.0);
 
         cat1.getProducts().addAll(Arrays.asList(product1, product2, product3));
-        cat2.getProducts().add(product2);
-        product1.getCategories().add(cat1);
-        product2.getCategories().addAll(Arrays.asList(cat1, cat2));
-        product3.getCategories().add(cat1);
+        cat2.getProducts().addAll(Arrays.asList(product2, product4));
+        cat3.getProducts().addAll(Arrays.asList(product5, product6));
+        cat4.getProducts().addAll(Arrays.asList(product1, product2, product3, product7));
+        cat5.getProducts().add(product8);
+        cat6.getProducts().addAll(Arrays.asList(product9, product10));
+        cat7.getProducts().add(product11);
 
-        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8));
-        productRepository.saveAll(Arrays.asList(product1, product2, product3));
+
+        product1.getCategories().addAll(Arrays.asList(cat1, cat4));
+        product2.getCategories().addAll(Arrays.asList(cat1, cat2, cat4));
+        product3.getCategories().addAll(Arrays.asList(cat1, cat4));
+        product4.getCategories().add(cat2);
+        product5.getCategories().add(cat3);
+        product6.getCategories().add(cat3);
+        product7.getCategories().add(cat4);
+        product8.getCategories().add(cat5);
+        product9.getCategories().add(cat6);
+        product10.getCategories().add(cat6);
+        product11.getCategories().add(cat7);
+
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
+        productRepository.saveAll(Arrays.asList(
+                product1, product2, product3, product4, product5, product6, product7, product8, product9, product10, product11
+        ));
 
         State state1 = new State(null, "São Paulo");
         State state2 = new State(null, "Minas Gerais");
