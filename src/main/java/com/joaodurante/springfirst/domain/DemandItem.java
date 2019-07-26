@@ -35,8 +35,15 @@ public class DemandItem implements Serializable {
 
     @JsonIgnore
     public Demand getDemand(){ return id.getDemand(); }
+
+    public void setDemand(Demand demand){ this.id.setDemand(demand); }
+
     public Product getProduct(){ return id.getProduct(); }
+
+    public void setProduct(Product product) { this.id.setProduct(product); }
+
     public void setId(DemandItemPK id) { this.id = id; }
+
     public Double getDiscount() {
         return discount;
     }
@@ -54,6 +61,9 @@ public class DemandItem implements Serializable {
     }
     public void setPrice(Double price) {
         this.price = price;
+    }
+    public Double getSubtotal(){
+        return (price - discount) * quantity;
     }
 
     @Override

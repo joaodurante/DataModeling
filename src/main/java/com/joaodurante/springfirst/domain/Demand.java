@@ -50,6 +50,13 @@ public class Demand implements Serializable {
     public Payment getPayment() { return payment; }
     public Customer getCustomer() { return customer; }
     public Set<DemandItem> getDemandItems() { return demandItems; }
+    public Double getTotal(){
+        Double total = 0.0;
+        for(DemandItem i : demandItems){
+            total += i.getSubtotal();
+        }
+        return total;
+    }
 
     public void setId(Integer id) { this.id = id; }
     public void setTime(Date time) { this.time = time; }

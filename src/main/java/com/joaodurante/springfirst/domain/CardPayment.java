@@ -1,11 +1,13 @@
 package com.joaodurante.springfirst.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.joaodurante.springfirst.domain.enums.PaymentState;
 
 import javax.persistence.Entity;
 
 @Entity
+@JsonTypeName("cardPayment")
 public class CardPayment extends Payment {
     private Integer installments;
 
@@ -15,6 +17,6 @@ public class CardPayment extends Payment {
         this.installments = installments;
     }
 
-    public Integer getInstalltements() { return installments; }
-    public void setInstalltements(Integer installments) { this.installments = installments; }
+    public Integer getInstallments() { return installments; }
+    public void setInstallments(Integer installments) { this.installments = installments; }
 }
