@@ -1,6 +1,8 @@
 package com.joaodurante.springproject.config;
 
 import com.joaodurante.springproject.services.DBService;
+import com.joaodurante.springproject.services.EmailService;
+import com.joaodurante.springproject.services.SmtpEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -25,5 +27,10 @@ public class DevConfig {
             return true;
         }else
             return false;
+    }
+
+    @Bean
+    public EmailService emailService(){
+        return new SmtpEmailService();
     }
 }
