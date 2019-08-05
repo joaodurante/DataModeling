@@ -6,10 +6,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Entity
 public class Demand implements Serializable {
@@ -76,5 +75,22 @@ public class Demand implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Demand number: ").append(id);
+        sb.append(", Instant: ").append(sdf.format(this.getTime()));
+        sb.append(", Customer: ").append(this.getCustomer().getName());
+        sb.append(", Payment status: ").append(getPayment().getState().getDescription());
+        sb.append("\nDetails:\n");
+        for(DemandItem i : getDemandItems())
+            sb.append(i.toString());
+
+        sb.append("Total value: ").append(nf.format(this.getTotal()));
+        return sb.toString();
     }
 }
